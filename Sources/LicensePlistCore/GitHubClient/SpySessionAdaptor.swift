@@ -30,7 +30,13 @@ open class SpySessionAdapter: NSObject, SessionAdapter, URLSessionDelegate, URLS
         setBuffer(NSMutableData(), forTask: task)
 
         let spyHander: (Data?, URLResponse?, Error?) -> Void = { data, response, error in
-            print("data: \(data?.hexString() ?? "nil")")
+            if let url = URLRequest.url {
+                print("requestURL: \(url)")
+            }
+            if let header = URLRequest.allHTTPHeaderFields {
+                print("requestHeader: \(header)")
+            }
+            print("data: \(data.flatMap {(String(data: $0, encoding: .utf8))} ?? "nil")")
             if let response = response as? HTTPURLResponse {
                 print("url: \(response.url?.absoluteString ?? "nil")")
                 print("code: \(response.statusCode)")

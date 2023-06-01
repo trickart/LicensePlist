@@ -15,7 +15,7 @@ extension GitHubRequest {
         var header = ["Accept": "application/vnd.github.drax-preview+json",
                       "User-Agent": "LicensePlist"]
         if let token = GitHubAuthorization.shared.token {
-            header["Authorization"] = "Token \(token)"
+            header["Authorization"] = "Bearer \(token)"
         }
         return header
     }

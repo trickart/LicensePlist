@@ -33,6 +33,7 @@ extension GitHubLicense {
                 if statusCode != 404 {
                     assert(false, String(describing: error))
                     if statusCode == 403 {
+                        print("error!: \(error)")
                         Log.warning("Failed to download \(name).\nYou can try `--github-token YOUR_REPO_SCOPE_TOKEN` option")
                     } else {
                         Log.warning("Failed to download \(name).\nError: \(error)")

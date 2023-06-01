@@ -26,7 +26,7 @@ extension GitHubLicense {
         let name = library.name
         Log.info("license download start(owner: \(owner), name: \(name))")
         return ResultOperation<GitHubLicense, DownloadError> { _ in
-            let result = Session.shared.lp.sendSync(RepoRequests.License(owner: owner, repo: name))
+            let result = spySession.lp.sendSync(RepoRequests.License(owner: owner, repo: name))
             switch result {
             case .failure(let error):
                 let statusCode = self.statusCode(from: error)
